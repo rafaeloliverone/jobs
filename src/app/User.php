@@ -16,8 +16,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'linkedin', 'location', 'avatar', 
+        'email', 'password', 'skills', 'about', 
+        'birth_date', 'cellphone',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
+
+    public function getAvatarImageAttribute($value) {
+        return $this->avatar == null ? asset('images/null.png') : asset($this->avatar);
+    }
+    public function getAvatarFilenameAttribute($value) {
+        return substr($this->avatar, 30, strlen($this->avatar));
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
