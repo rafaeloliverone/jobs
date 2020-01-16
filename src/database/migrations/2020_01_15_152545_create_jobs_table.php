@@ -27,9 +27,10 @@ class CreateJobsTable extends Migration
             $table->integer('company_id')->unsigned();
             $table->integer('hiring_contact')->unsigned();
             $table->timestamps();
-            
+
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('hiring_contact')->references('id')->on('users');
+            
         });
     }
 
