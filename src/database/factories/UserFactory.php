@@ -20,7 +20,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'linkedin' => "https://www.linkedin.com/in/{$faker->userName}/",
-        'location' => $faker->address,
+        'location' => $faker->timezone,
         'avatar' => $faker->imageUrl($width = 400, $height = 240),
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
