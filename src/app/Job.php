@@ -20,6 +20,9 @@ class Job extends Model
         return $this->belongsTo('App\Company');
     }
 
+    /**
+     * Get users who are recruiters for this job
+     */
     public function user()
     {
         return $this->belongsTo('App\User');

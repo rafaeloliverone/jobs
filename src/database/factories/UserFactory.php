@@ -19,9 +19,16 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'linkedin' => "https://www.linkedin.com/in/{$faker->userName}/",
+        'location' => $faker->address,
+        'avatar' => $faker->imageUrl($width = 400, $height = 240),
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'skills' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'about' => $faker->text,
+        'birth_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'cellphone' => $faker->tollFreePhoneNumber,
+        'email_verified_at' => now(),
         'remember_token' => Str::random(10),
     ];
 });

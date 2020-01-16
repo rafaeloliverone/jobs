@@ -21,18 +21,27 @@ class User extends Authenticatable
         'birth_date', 'cellphone',
     ];
 
+    /**
+     * Get the vacancies this user is as a recruiter
+     */
     public function jobs()
     {
         return $this->hasMany('App\Job');
     }
 
+    /**
+     * Get the avatar this user 
+     */
     public function getAvatarImageAttribute($value) {
         return $this->avatar == null ? asset('images/null.png') : asset($this->avatar);
     }
+
+    /**
+     * Get the filename of avatar this user 
+     */
     public function getAvatarFilenameAttribute($value) {
         return substr($this->avatar, 30, strlen($this->avatar));
     }
-
 
     /**
      * The attributes that should be hidden for arrays.

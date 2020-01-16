@@ -11,6 +11,9 @@ class Company extends Model
         'website', 'linkedin', 'twitter', 'location',
     ];
 
+    /**
+     * Get the jobs that owns the company.
+     */
     public function jobs()
     {
         return $this->hasMany('App\Job');
