@@ -15,7 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('jobs', [
-    'as'   => 'index',
-    'uses' => 'JobController@index',
-]);
+Route::resource('/jobs', 'JobController');

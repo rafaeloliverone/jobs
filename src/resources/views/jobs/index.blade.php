@@ -1,53 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <title>@yield('title')</title>
-  </head>
+@extends('layout')
 
-  <body>
-    <div class="container">
+@section('title', 'Jobs')
+
+@section('content')        
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Title</th>
+				<th>Location</th>
+				<th>Job_type</th>
+				<th>Experience</th>
+				<th>Range_salary_initial</th>
+				<th>Range_salary_end</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
         
-        <table>
-            <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Title</th>
-                  <th>Location</th>
-                  <th>Job_type</th>
-                  <th>Experience</th>
-                  <th>Range_salary_initial</th>
-                  <th>Range_salary_end</th>
-              </tr>
-            </thead>
-        
-            <tbody>
-                @foreach($jobs as $job) 
-                
-                <tr>
-                    <td></td>
-                    <td>{{$job->title}}</td>
-                    <td>{{$job->location}}</td>
-                    <td>{{$job->job_type}}</td>
-                    <td>{{$job->experience}}</td>
-                    <td>{{$job->range_salary_initial}}</td>
-                    <td>{{$job->range_salary_final}}</td>
-                </tr> 
-                @endforeach
+		<tbody>
+			@foreach($jobs as $job) 
+			
+			<tr>
+				<td></td>
+				<td>{{$job->title}}</td>
+				<td>{{$job->location}}</td>
+				<td>{{$job->job_type}}</td>
+				<td>{{$job->experience}}</td>
+				<td>{{$job->range_salary_initial}}</td>
+				<td>{{$job->range_salary_final}}</td>
+				<td>
+					<form action="{{ route('jobs.destroy', $job)}}" method="post">
+					@csrf
+					@method('DELETE')
+					<button class="btn btn-danger" type="submit"> <i class="material-icons">delete</i> </button>
+					</form>
+				</td>
+			</tr> 
+			@endforeach
+		</tbody>
+    </table>
 
-            </tbody>
-        </table>
+    <a href="{{ route('jobs.create') }}" class="btn btn-primary" role="button">Add job </a>
 
-    </div>
-
+    @endsection
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

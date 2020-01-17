@@ -25,7 +25,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return view('jobs.create');
     }
 
     /**
@@ -36,7 +36,23 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:100',
+            'location' => 'required',
+            'challenge' => 'required|url',
+            'description' => 'required',
+            'skills' => '',
+            'job_type' => '',
+            'experience' => 'required',
+            'range_salary_initial' => '',
+            'range_salary_final' => '',
+            'company_id' => 'required',
+            'hiring_contact' => 'required',
+        ]);
+
+        Job::create($validatedData);
+
+        return redirect(route('jobs.index'))->with('success', 'Job is successfully saved');
     }
 
     /**
@@ -81,6 +97,9 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+        $job = Job::findOrFail($job->id);
+        $job->delete();
+
+        return redirect(route('jobs.index'))->with('sucess', 'Vacancy is successfully deleted');
     }
 }

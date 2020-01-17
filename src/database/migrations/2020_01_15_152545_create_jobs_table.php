@@ -19,11 +19,11 @@ class CreateJobsTable extends Migration
             $table->string('location', 150);
             $table->string('challenge');
             $table->text('description');
-            $table->text('skills');
-            $table->enum('job_type', ['full_time', 'half_time']);
-            $table->enum('experience', ['-1 year', '+1 year', '+2 years', '+3 years', '+4 years']);
-            $table->integer('range_salary_initial');
-            $table->integer('range_salary_final');
+            $table->text('skills')->nullable();
+            $table->enum('job_type', ['full_time', 'half_time'])->default('full_time');;
+            $table->enum('experience', ['-1 year', '+1 year', '+2 years', '+3 years', '+4 years'])->default('-1 year');;
+            $table->integer('range_salary_initial')->nullable();
+            $table->integer('range_salary_final')->nullable();
             $table->integer('company_id')->unsigned();
             $table->integer('hiring_contact')->unsigned();
             $table->timestamps();
