@@ -12,10 +12,24 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::all();
-        return view('jobs.index', compact('jobs'));
+        $per_page = $request->per_page ?? 5;
+        $search = $request->search ?? '';
+
+        $jobs = Job::where('title', 'LIKE', '%' . $search . '%')
+            ->orWhere('location', 'LIKE', '%' . $search . '%')
+            ->paginate($per_page);
+
+        if ($per_page){
+            $jobs->appends(['per_page' => $per_page]);
+        }
+
+        if ($search){
+            $jobs->appends(['search' => $search] );
+        }
+
+        return view('jobs.index', compact('jobs', 'per_page', 'search'));
     }
 
     /**
@@ -74,7 +88,9 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+        $job = Job::findOrFail($job->id);
+        return view('jobs.edit', compact('job'));
+
     }
 
     /**
@@ -86,7 +102,18 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+
+        $validatedData = $request->validate([
+            'title' => 'required|max:100',
+            'description' => 'required',
+            'experience' => 'required',
+            'challenge' => 'required|url',
+        ]);
+
+        Job::whereId($job->id)->update($validatedData);
+
+        return redirect(route('jobs.index'))->with('sucess', 'Job is successfully saved');
+
     }
 
     /**

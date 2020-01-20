@@ -13,6 +13,7 @@
 				<th>Experience</th>
 				<th>Range_salary_initial</th>
 				<th>Range_salary_end</th>
+				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 		</thead>
@@ -28,6 +29,7 @@
 				<td>{{$job->experience}}</td>
 				<td>{{$job->range_salary_initial}}</td>
 				<td>{{$job->range_salary_final}}</td>
+				<td><a href="{{ route('jobs.edit', $job) }}"> <button class="btn btn-danger" type="submit"> <i class="material-icons">edit</i> </button> </td>
 				<td>
 					<form action="{{ route('jobs.destroy', $job)}}" method="post">
 					@csrf
@@ -38,7 +40,13 @@
 			</tr> 
 			@endforeach
 		</tbody>
-    </table>
+	</table>
+	
+	<div class="row ">
+		<div class="center-align">
+			{{ $jobs->links() }}
+		</div>
+	</div>
 
     <a href="{{ route('jobs.create') }}" class="btn btn-primary" role="button">Add job </a>
 

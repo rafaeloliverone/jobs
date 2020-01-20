@@ -1,53 +1,56 @@
 @extends('layout')
 
-@section('title', 'Create Job')
+@section('title', 'Edit Job')
 
 @section('content')
 <div class="card">
-    
     <div class="card-body">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+    
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+
+        </ul>
     </div>
+    @endif
 </div>
+
+
 
 <div class="row">
 
     <i class="small material-icons">arrow_back</i>
     
-    <form class="col s12" method="post" action="{{ route('jobs.store') }}" style="margin-top:50px;">
+    <form class="col s12" method="post" action="{{ route('jobs.update', $job) }}" style="margin-top:50px;">
         @csrf
+        @method('PATCH')
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Title" id="title" type="text" class="validate" name="title" >
+                <input placeholder="Title" id="title" type="text" class="validate" name="title" value="{{ $job->title }}">
                 <label for="title">Title</label>
             </div>
 
             <div class="input-field col s6">
-                <input placeholder="Location" id="location" type="text" class="validate" name="location">
+                <input placeholder="Location" id="location" type="text" class="validate" name="location" value="{{ $job->location }}">
                 <label for="location">Location</label>
             </div>
 
             <div class="input-field col s6">
-                <input placeholder="Enter a URL" id="challenge" type="text" class="validate" name="challenge">
+                <input placeholder="Enter a URL" id="challenge" type="text" class="validate" name="challenge" value="{{ $job->challenge }}">
                 <label for="challenge">Challenge</label>
             </div>
 
             <div class="input-field col s6">
-                <input placeholder="Describe the vacancy" id="description" type="text" class="validate" name="description">
+                <input placeholder="Describe the vacancy" id="description" type="text" class="validate" name="description" value="{{ $job->description }}">
                 <label for="description">Description</label>
             </div>
             
             <div class="col s6">
-                <div class="chips chips-placeholder" name="skills">
-                </div>  
+                <div class="chips chips-placeholder" name="skills"></div>  
             </div>
 
             <div class="input-field col s6">
@@ -62,7 +65,7 @@
                 <label>Experience</label>
             </div>
 
-            <input placeholder="experience" id="fieldExperience" type="text" class="validate" name="experience" style="display:none;">
+            <input placeholder="experience" id="fieldExperience" type="text" class="validate" name="experience" style="display:none;" value="{{ $job->experience }}">
 
             
             <div class="input-field col s6">
@@ -74,33 +77,33 @@
                 <label>Job Type</label>
             </div>
             
-            <input placeholder="jobs" id="fieldJob" type="text" class="validate" name="job_type" style="display:none;">
+            <input placeholder="jobs" id="fieldJob" type="text" class="validate" name="job_type" style="display:none;" value="{{ $job->job_type }}">
 
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="range_salary_initial" type="number" class="validate" name="range_salary_initial">
+                <input placeholder="Placeholder" id="range_salary_initial" type="number" class="validate" name="range_salary_initial" value="{{ $job->range_salary_initial }}">
                 <label for="range_salary_initial">Salary initial</label>
             </div>
 
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="range_salary_final" type="number" class="validate" name="range_salary_final">
+                <input placeholder="Placeholder" id="range_salary_final" type="number" class="validate" name="range_salary_final" value="{{ $job->range_salary_final }}">
                 <label for="range_salary_final">Salary final</label>
             </div>
             
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="company_id" type="number" class="validate" name="company_id" >
+                <input placeholder="Placeholder" id="company_id" type="number" class="validate" name="company_id" value="{{ $job->company_id }}">
                 <label for="company_id">Company Id</label>
             </div>
 
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="hiring_contact" type="number" class="validate" name="hiring_contact">
+                <input placeholder="Placeholder" id="hiring_contact" type="number" class="validate" name="hiring_contact" value="{{ $job->hiring_contact }}">
                 <label for="hiring_contact">Hiring Contact</label>
             </div>
         </div>
 
-    <button type="submit" onclick="loadValuesInputs()" class="btn btn-primary">Create job</button>
+    <button type="submit" onclick="loadValuesInputs()" class="btn btn-primary">Update job</button>
     </form>
 </div>
-@endsection
+
 
 <script>
 
@@ -136,3 +139,5 @@
     };
 
 </script>
+
+@endsection

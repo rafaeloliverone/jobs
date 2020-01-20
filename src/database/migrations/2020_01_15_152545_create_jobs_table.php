@@ -20,8 +20,8 @@ class CreateJobsTable extends Migration
             $table->string('challenge');
             $table->text('description');
             $table->text('skills')->nullable();
-            $table->enum('job_type', ['full_time', 'half_time'])->default('full_time');;
-            $table->enum('experience', ['-1 year', '+1 year', '+2 years', '+3 years', '+4 years'])->default('-1 year');;
+            $table->string('job_type', 100)->nullable();
+            $table->string('experience', 100)->nullable();
             $table->integer('range_salary_initial')->nullable();
             $table->integer('range_salary_final')->nullable();
             $table->integer('company_id')->unsigned();
