@@ -3,136 +3,78 @@
 @section('title', 'Create Job')
 
 @section('content')
-<div class="card">
-    
-    <div class="card-body">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+
+
+<form method="post" action="{{ route('jobs.store') }}" style="margin-top:50px;">
+    @csrf
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
     </div>
-</div>
 
-<div class="row">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Location</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="location">
+    </div>
 
-    <i class="small material-icons">arrow_back</i>
-    
-    <form class="col s12" method="post" action="{{ route('jobs.store') }}" style="margin-top:50px;">
-        @csrf
-        <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Title" id="title" type="text" class="validate" name="title" >
-                <label for="title">Title</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Challenge</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="challenge">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Location" id="location" type="text" class="validate" name="location">
-                <label for="location">Location</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Description</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="description">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Enter a URL" id="challenge" type="text" class="validate" name="challenge">
-                <label for="challenge">Challenge</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Skills</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="skills">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Describe the vacancy" id="description" type="text" class="validate" name="description">
-                <label for="description">Description</label>
-            </div>
-            
-            <div class="col s6">
-                <div class="chips chips-placeholder" name="skills">
-                </div>  
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Experience</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="experience">
+    </div>
 
-            <div class="input-field col s6">
-                <select id="experience" >
-                    <option value="" disabled selected></option>
-                    <option value="-1 year">-1 year</option>
-                    <option value="+1 year">+1 year</option>
-                    <option value="+2 years">+2 years</option>
-                    <option value="+3 years">+3 years</option>
-                    <option value="+4 years">+4 years</option>
-                </select>
-                <label>Experience</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Job Type</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="job_type">
+    </div>
 
-            <input placeholder="experience" id="fieldExperience" type="text" class="validate" name="experience" style="display:none;">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Salary initial</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="range_salary_initial">
+    </div>
 
-            
-            <div class="input-field col s6">
-                <select id="job_type">
-                    <option value="" disabled selected></option>
-                    <option value="Full-Time">Full-Time</option>
-                    <option value="Half-Time">Half-Time</option>
-                </select>
-                <label>Job Type</label>
-            </div>
-            
-            <input placeholder="jobs" id="fieldJob" type="text" class="validate" name="job_type" style="display:none;">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Salary final</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="range_salary_final">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="range_salary_initial" type="number" class="validate" name="range_salary_initial">
-                <label for="range_salary_initial">Salary initial</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Company Id</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="company_id">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="range_salary_final" type="number" class="validate" name="range_salary_final">
-                <label for="range_salary_final">Salary final</label>
-            </div>
-            
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="company_id" type="number" class="validate" name="company_id" >
-                <label for="company_id">Company Id</label>
-            </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Hiring Contact</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="hiring_contact">
+    </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="hiring_contact" type="number" class="validate" name="hiring_contact">
-                <label for="hiring_contact">Hiring Contact</label>
-            </div>
-        </div>
+    <button type="submit" class="btn btn-primary">Add job</button>
 
-    <button type="submit" onclick="loadValuesInputs()" class="btn btn-primary">Create job</button>
-    </form>
-</div>
+
+</form>
 @endsection
-
-<script>
-
-    var options = {
-        placeholder: "Skills",
-        autocompleteOptions: true,
-        secondaryPlaceholder: "+Skills"
-    };
-   
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.chips');
-        var instances = M.Chips.init(elems, options);
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems, options);
-    });
-
-    function loadValuesInputs() {
-        var optionsExperience = document.getElementById("experience");
-        let valueExperience = optionsExperience.options[optionsExperience.selectedIndex].value;
-
-        var inputExperience= document.getElementById("fieldExperience"); 
-        inputExperience.value = valueExperience;
-
-
-        var optionsJobs = document.getElementById("job_type");
-        let valueJobType = optionsJobs.options[optionsJobs.selectedIndex].value;
-
-        var inputJob = document.getElementById("fieldJob"); 
-        inputJob.value = valueJobType;
-    };
-
-</script>
