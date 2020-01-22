@@ -14,8 +14,22 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
-        return view('companies.index', compact('companies'));
+        $per_page = $request->per_page ?? 6;
+        $search = $request->search ?? '';
+
+        $companies = Company::where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('website', 'LIKE', '%' . $search . '%')
+            ->paginate($per_page);
+
+        if ($per_page){
+            $companies->appends(['per_page' => $per_page]);
+        }
+
+        if ($search){
+            $companies->appends(['search' => $search] );
+        }
+
+        return view('companies.index', compact('companies', 'per_page', 'search'));
     }
 
     /**
@@ -25,7 +39,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -36,7 +50,19 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:100',
+            'photo' => 'required',
+            'description' => 'required',
+            'website' => 'required',
+            'linkedin' => 'required',
+            'twitter' => 'required',
+            'location' => 'required',
+        ]);
+
+        Company::create($validatedData);
+
+        return redirect(route('companies.index'))->with('success', 'Company is successfully saved');
     }
 
     /**
@@ -58,7 +84,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        $company = Company::findOrFail($company->id);
+        return view('companies.edit', compact('company'));
     }
 
     /**
@@ -70,7 +97,15 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'website' => 'required|url',
+        ]);
+
+        Company::whereId($company->id)->update($validatedData);
+
+        return redirect(route('companies.index'))->with('sucess', 'Company is successfully saved');
     }
 
     /**
@@ -81,6 +116,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company = Company::findOrFail($company->id);
+        $company->delete();
+
+        return redirect(route('companies.index'))->with('sucess', 'Company is successfully deleted');
     }
 }

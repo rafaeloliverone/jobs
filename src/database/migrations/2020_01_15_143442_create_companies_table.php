@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('photo', 200)->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('twitter')->nullable();

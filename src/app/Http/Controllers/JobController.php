@@ -14,7 +14,7 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->per_page ?? 5;
+        $per_page = $request->per_page ?? 6;
         $search = $request->search ?? '';
 
         $jobs = Job::where('title', 'LIKE', '%' . $search . '%')
@@ -90,7 +90,6 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($job->id);
         return view('jobs.edit', compact('job'));
-
     }
 
     /**
@@ -102,7 +101,6 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-
         $validatedData = $request->validate([
             'title' => 'required|max:100',
             'description' => 'required',
@@ -113,7 +111,6 @@ class JobController extends Controller
         Job::whereId($job->id)->update($validatedData);
 
         return redirect(route('jobs.index'))->with('sucess', 'Job is successfully saved');
-
     }
 
     /**
