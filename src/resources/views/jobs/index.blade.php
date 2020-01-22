@@ -12,7 +12,7 @@
 </nav>
 
 <div class="row">
-	<div class="card-group">
+	<div class="card-group mt-4">
 
 		@foreach($jobs as $job)
 		<div class="col-sm-4">
@@ -31,7 +31,7 @@
 				</ul>
 				<div class="card-body">
 
-					<a href="{{ route('jobs.edit', $job) }}"> <button class="btn btn-danger" type="submit"> <i class="material-icons">edit</i> </button> </a>
+					<a href="{{ route('jobs.edit', $job) }}"> <button class="btn btn-primary" type="submit"> <i class="material-icons">edit</i> </button> </a>
 					<form action="{{ route('jobs.destroy', $job)}}" method="post">
 						@csrf
 						@method('DELETE')
@@ -46,6 +46,6 @@
 
 {{ $jobs->links() }}
 
-<a href="{{ route('jobs.create') }}" class="btn btn-primary" role="button">Add job </a>
+<a href="{{ route('jobs.create') }}" class="btn btn-success" role="button">Add job </a>
 
 @endsection

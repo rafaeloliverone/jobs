@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/jobs', 'JobController');
+
+Route::resource('/companies', 'CompanyController');
