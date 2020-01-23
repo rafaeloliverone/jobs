@@ -42,6 +42,21 @@ class JobController extends Controller
         return view('jobs.create');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $jobs = Job::where('title', 'LIKE', '%'.$search.'%')->paginate(6); 
+        
+        if ($jobs->count() < 1 ){
+            $notfound = "No records found";
+            return view('jobs.index', compact('jobs','notfound'));
+        } else 
+        {
+            return view('jobs.index', compact('jobs'));
+        }
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

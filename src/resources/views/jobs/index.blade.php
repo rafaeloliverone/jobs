@@ -17,14 +17,25 @@
         </ul>
     </div>
 
-	<form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+<form action="{{ route('jobs.search') }}" method="GET" class="form-inline">
+		<input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	</form>
 </nav>
 
 <div class="row">
+
 	<div class="card-group mt-4">
+		
+		<div class="col-sm-12">
+			@if (isset($notfound))
+				<div class="alert alert-danger">
+					<ul>
+	        			<li>{{ $notfound  }}</li>
+    				</ul>	
+				</div>
+			@endif
+		</div>
 
 		@foreach($jobs as $job)
 		<div class="col-sm-4">

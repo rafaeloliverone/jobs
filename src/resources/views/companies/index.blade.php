@@ -54,6 +54,9 @@
                                 <button class="btn btn-danger" type="submit"> <i class="material-icons">delete</i> </button>
                             </form>
                         </div>
+                        <div class="p-2">
+                            <a href="{{ route('companies.show', $company) }}"> <button class="btn btn-primary" type="submit"> <i class="material-icons">details</i> </button> </a>
+                        </div>
                       </div>
                 </div>
 
