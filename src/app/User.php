@@ -22,11 +22,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the vacancies this user is as a recruiter
+     * Get the positions were this user is a recruiter
      */
     public function jobs()
     {
         return $this->hasMany('App\Job');
+    }
+
+    /**
+     * Get the user's skills
+     */
+    public function skills()
+    {
+        return $this->belongsToMany('App\Skill', 'user_skill');
     }
 
     /**

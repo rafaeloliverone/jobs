@@ -11,7 +11,6 @@ $factory->define(Job::class, function (Faker $faker) {
         'location' => $faker->timezone,
         'challenge' => "https://github.com/jobs/{$faker->jobTitle}",
         'description' => $faker->catchPhrase,
-        'skills' => $faker->catchPhrase,
         'job_type' => "Full time",
         'experience' => "+{$faker->numberBetween($min = 1, $max = 5)} years",
         'range_salary_initial' => $faker->numberBetween($min = 1000, $max = 9000),
