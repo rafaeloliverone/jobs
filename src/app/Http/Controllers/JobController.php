@@ -14,8 +14,8 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        $per_page = $request->per_page ?? 6;
-        $search = $request->search ?? '';
+        $per_page = $request->per_page ?? 12;
+        $search = $request->title ?? '';
 
         $jobs = Job::where('title', 'LIKE', '%' . $search . '%')
             ->orWhere('location', 'LIKE', '%' . $search . '%')
@@ -29,7 +29,7 @@ class JobController extends Controller
             $jobs->appends(['search' => $search] );
         }
 
-        return view('jobs.index', compact('jobs', 'per_page', 'search'));
+        return $jobs->toJson();
     }
 
     /**
@@ -45,7 +45,7 @@ class JobController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('search');
-        $jobs = Job::where('title', 'LIKE', '%'.$search.'%')->paginate(6); 
+        $jobs = Job::where('title', 'LIKE', '%'.$search.'%')->paginate(12); 
         
         if ($jobs->count() < 1 ){
             $notfound = "No records found";
@@ -70,7 +70,6 @@ class JobController extends Controller
             'location' => 'required',
             'challenge' => 'required|url',
             'description' => 'required',
-            'skills' => '',
             'job_type' => '',
             'experience' => 'required',
             'range_salary_initial' => '',
@@ -81,7 +80,7 @@ class JobController extends Controller
 
         Job::create($validatedData);
 
-        return redirect(route('jobs.index'))->with('success', 'Job is successfully saved');
+        return response()->json('success', 'Job is successfully saved');
     }
 
     /**

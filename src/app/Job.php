@@ -28,5 +28,13 @@ class Job extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * Get the skills required to this job
+     */
+    public function skills()
+    {
+        return $this->belongsToMany('App\Skill', 'job_skill');
+    }
+
 
 }
