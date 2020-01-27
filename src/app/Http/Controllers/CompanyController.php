@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Job;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -74,8 +75,9 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         $company = Company::findOrFail($company->id);
-        $jobs = $company->jobs();
-        dd($jobs);
+        $jobs = Job::where('company_id', '=', $company->id)->get();
+        
+
         return view('companies.details', compact('company','jobs'));
     }
 
@@ -102,6 +104,7 @@ class CompanyController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
+            'photo' => 'required',
             'description' => 'required',
             'website' => 'required|url',
         ]);

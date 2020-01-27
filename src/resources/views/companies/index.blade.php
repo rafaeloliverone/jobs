@@ -29,7 +29,7 @@
         @foreach($companies as $company)
         <div class="col-sm-4">
             <div class="card" style="width: 18rem; margin:5px;">
-                <img src="https://logodownload.org/wp-content/uploads/2015/05/uber-logo-1-1.png" class="card-img-top" alt="..."> 
+                <img src="{{ $company->photo }}" class="card-img-top" alt="..."> 
                 <div class="card-body">
                     <h5 class="card-title">{{$company->name}}</h5>
                     <p class="card-text"></p>

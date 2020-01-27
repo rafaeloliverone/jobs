@@ -31,4 +31,17 @@
         </div>
 
     </div>
+
+    <div class="row">
+        @foreach($jobs as $job)
+        <div class="col-8">
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $job->title }}</h5>
+                    <p class="card-text">{{ $job->challenge }}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
 </div>
