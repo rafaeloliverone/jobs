@@ -11,10 +11,12 @@
 |
 */
 
-// Route::get('/search', 'JobController@search')->name('jobs.search');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Route::resource('/jobs', 'JobController');
+Route::get('/search', 'JobController@search')->name('jobs.search');
 
-// Route::resource('/companies', 'CompanyController');
+Route::resource('/jobs', 'JobController');
 
-Route::view('/{path?}', 'app');
+Route::resource('/companies', 'CompanyController');
