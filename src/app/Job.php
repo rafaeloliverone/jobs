@@ -28,5 +28,12 @@ class Job extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function getNameCompany()
+    {
+        $company_id = $this->company_id;
+        $company = Company::findOrFail($company_id);
+        return $company->name;
+
+    }
 
 }

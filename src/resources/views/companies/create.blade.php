@@ -14,56 +14,64 @@
 </div>
 @endif
 
-<div class="card">
-    <div class="card-body ">
-        <form method="post" action="{{ route('companies.store') }}" style="margin-top:50px;">
-            @csrf
-            <div class="form-row ">
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="name">
-                </div>
 
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Description</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="description">
-                </div>
-
+<div class="row" style="margin-top:25vh;">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header text-white bg-dark d-flex justify-content-center ">
+                Create Company
             </div>
-
-            <div class="form-row ">
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Location</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="location">
+            <div class="card-body ">
+            <form method="post" action="{{ route('companies.store') }}" style="margin-top:50px;">
+                @csrf
+                <div class="form-row ">
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">Name</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="name">
+                    </div>
+    
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">Description</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="description">
+                    </div>
+    
                 </div>
-
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Photo</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="photo">
+    
+                <div class="form-row ">
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">Location</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="location">
+                    </div>
+    
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">Photo</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="photo">
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-row ">
-                <div class="form-group col-md-4">
-                    <label for="exampleFormControlInput1">Website</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="website">
+    
+                <div class="form-row ">
+                    <div class="form-group col-md-4">
+                        <label for="exampleFormControlInput1">Website</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="website">
+                    </div>
+    
+                    <div class="form-group col-md-4">
+                        <label for="exampleFormControlInput1">Linkedin</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="linkedin">
+                    </div>
+    
+                    <div class="form-group col-md-4">
+                        <label for="exampleFormControlInput1">Twitter</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="twitter">
+                    </div>
                 </div>
-
-                <div class="form-group col-md-4">
-                    <label for="exampleFormControlInput1">Linkedin</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="linkedin">
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="exampleFormControlInput1">Twitter</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="twitter">
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add company</button>
-
-        </form>
+    
+                <button type="submit" class="btn btn-success">Add company</button>
+    
+            </form>
+        </div>
     </div>
+
 </div>
 
 @endsection
