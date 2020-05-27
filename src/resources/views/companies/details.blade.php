@@ -4,6 +4,11 @@
 
 @section('content')
 <div class="container mt-3">
+
+    <li class="nav-item">
+        <a href="{{ route('companies.createjob',  $company->id ) }}"> <button type="button" class="btn btn-success">Add aq job</button> </a>
+    </li>
+
     <div class="row">
         <div class="col-12">
             
@@ -21,8 +26,6 @@
                     <h5 class="card-title mt-3">{{ $company->name }}</h5>
                     <h6 class="card-subtitle mt-3 mb-3 text-muted">{{ $company->description }}</h6>
                     <p class="card-text mt-3">{{ $company->location }}</p>
-                    <!-- <a href="#" class="card-link">Link do card</a>
-                <a href="#" class="card-link">Outro link</a> -->
                 </div>
             </div>
         </div>

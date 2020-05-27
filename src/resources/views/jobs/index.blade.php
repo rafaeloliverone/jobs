@@ -5,7 +5,7 @@
 @section('content')
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
 	<a class="navbar-brand" href="#">
-        <img src="https://uploads.scratch.mit.edu/users/avatars/35672485.png" width="50" height="50" alt="" class="rounded-circle">
+        <!-- <img src="https://uploads.scratch.mit.edu/users/avatars/35672485.png" width="50" height="50" alt="" class="rounded-circle"> -->
         Jobs
     </a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

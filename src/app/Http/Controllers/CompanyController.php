@@ -51,17 +51,28 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:100',
-            'photo' => 'required',
-            'description' => 'required',
-            'website' => 'required',
-            'linkedin' => 'required',
-            'twitter' => 'required',
-            'location' => 'required',
-        ]);
+        $company = new Company();
 
-        Company::create($validatedData);
+        $company->name = $request->name;
+        $company->photo = '';
+        $company->description = $request->description;
+        $company->website = $request->website;
+        $company->linkedin = $request->linkedin;
+        $company->twitter = $request->twitter;
+        $company->location = $request->location;
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->extension();
+
+            $nameFile = $request->name . '.' . $extension;
+            $upload = $request->photo->storeAs('companies', $nameFile);
+
+            $request->photo = $nameFile;
+            $company->photo = $request->photo;
+        }
+       
+        $company->save();
 
         return redirect(route('companies.index'))->with('success', 'Company is successfully saved');
     }
@@ -91,6 +102,12 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($company->id);
         return view('companies.edit', compact('company'));
+    }
+
+    public function createjob(Company $company)
+    {
+        $company = Company::findOrFail($company->id);
+        return view('companies.job', compact('company'));
     }
 
     /**

@@ -22,7 +22,7 @@
                 Create Company
             </div>
             <div class="card-body ">
-            <form method="post" action="{{ route('companies.store') }}" style="margin-top:50px;">
+            <form method="post" action="{{ route('companies.store') }}" enctype="multipart/form-data" style="margin-top:50px;">
                 @csrf
                 <div class="form-row ">
                     <div class="form-group col-md-6">
@@ -44,11 +44,11 @@
                     </div>
     
                     <div class="form-group col-md-6">
-                        <label for="exampleFormControlInput1">Photo</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="photo">
+                        <label for="exampleFormControlFile1">Photo</label>
+                        <input type="file" class="form-control" id="exampleFormControlFile1" name="photo" style="padding-top:2.5px; padding-left:5px">
                     </div>
                 </div>
-    
+   
                 <div class="form-row ">
                     <div class="form-group col-md-4">
                         <label for="exampleFormControlInput1">Website</label>

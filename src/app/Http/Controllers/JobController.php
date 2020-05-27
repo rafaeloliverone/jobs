@@ -76,12 +76,12 @@ class JobController extends Controller
             'range_salary_initial' => '',
             'range_salary_final' => '',
             'company_id' => 'required',
-            'hiring_contact' => 'required',
+            'hiring_contact' => '',
         ]);
 
         Job::create($validatedData);
 
-        return redirect(route('jobs.index'))->with('success', 'Job is successfully saved');
+        return redirect(route('companies.index'))->with('success', 'Job is successfully saved');
     }
 
     /**
