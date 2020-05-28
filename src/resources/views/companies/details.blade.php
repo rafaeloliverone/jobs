@@ -5,10 +5,6 @@
 @section('content')
 <div class="container mt-3">
 
-    <li class="nav-item">
-        <a href="{{ route('companies.createjob',  $company->id ) }}"> <button type="button" class="btn btn-success">Add aq job</button> </a>
-    </li>
-
     <div class="row">
         <div class="col-12">
             
@@ -20,7 +16,7 @@
 
     <div class="row mt-3">
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card" style="height:275px;">
                 <div class="card-body">
                     <h5 class="card-title mt-3">{{ $company->name }}</h5>
@@ -30,7 +26,27 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
+        <div class="card" style="height:275px;">
+                <div class="card-body">
+                    <a href="{{ route('companies.createjob',  $company->id ) }}"> <button type="button" class="btn btn-success mb-3" style="width:100%">Add a job</button> </a>
+                    
+                    <form action="{{ route('companies.destroy', $company)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit" style="width:100%"> Delete company </button>
+                    </form>
+
+                    <a href="{{ route('companies.edit', $company) }}"> <button class="btn btn-primary" type="submit" style="width:100%"> Edit company </button> </a>
+
+
+                </div>
+            </div>
+        
+        </div>
+
+
+        <div class="col-md-3">
             <div class="card" style="height:275px;">
                 <div class="card-body">
                     <h5 class="card-title">About {{ $company->name }}</h5>

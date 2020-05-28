@@ -121,11 +121,13 @@ class CompanyController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
-            'photo' => 'required',
             'description' => 'required',
             'website' => 'required|url',
         ]);
 
+    
+
+        // dd($validatedData['photo']);
         Company::whereId($company->id)->update($validatedData);
 
         return redirect(route('companies.index'))->with('sucess', 'Company is successfully saved');
@@ -144,4 +146,22 @@ class CompanyController extends Controller
 
         return redirect(route('companies.index'))->with('sucess', 'Company is successfully deleted');
     }
+
+    
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $companies = Company::where('name', 'LIKE', '%'.$search.'%')->paginate(6); 
+        
+        if ($companies->count() < 1 ){
+            $notfound = "No records found";
+            return view('companies.index', compact('companies','notfound'));
+        } else 
+        {
+            return view('companies.index', compact('companies'));
+        }
+
+    }
+
+
 }

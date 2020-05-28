@@ -15,8 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/search', 'JobController@search')->name('jobs.search');
 Route::resource('/jobs', 'JobController');
 
+
+Route::get('/search', 'CompanyController@search')->name('companies.search');
 Route::get('/companies/{company?}/jobs', 'CompanyController@createjob')->name('companies.createjob');
 Route::resource('/companies', 'CompanyController');

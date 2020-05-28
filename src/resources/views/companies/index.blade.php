@@ -23,57 +23,55 @@
         </ul>
     </div>
 
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <form action="{{ route('companies.search') }}" method="GET" class="form-inline">
+		<input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	</form>
+
 </nav>
 
-<div class="row">
-    <div class="card-group mt-4">
 
-        @foreach($companies as $company)
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-            <div class="card" style="margin:5px; height:800px; margin-top:30px;">
-                
-                <img class="card-img-top" src="{{ url('storage/companies/'.$company->photo) }}" style="height:300px;" alt="Card image cap">
+<div class="col-sm-12 mt-3" style="list-style-type: none;;">
+			@if (isset($notfound))
+				<div class="alert alert-danger">
+					<span>{{ $notfound  }}</span>
+				</div>
+			@endif
+		</div>
+<div class="row row-cols-1 row-cols-md-2">
 
-                <div class="card-body">
-                    <h5 class="card-title">{{$company->name}}</h5>
-                    <p class="card-text"></p>
+    
+    @foreach($companies as $company)
+    <div class="col mb-3 mt-3">
+        <div class="card" style="height:180px;">
+            <div class="row" style="max-height:180px;">
+                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                    <img src="{{ url('storage/companies/'.$company->photo) }}" class="img-fluid" style="height:178px; width:180px;" class="card-img" alt="...">
                 </div>
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{$company->description}}</li>
-                    <li class="list-group-item">{{$company->location}}</li>
-                    <li class="list-group-item">{{$company->website}}</li>
-                    <li class="list-group-item">{{$company->linkedin}}</li>
-                    <li class="list-group-item">{{$company->twitter}}</li>
-                </ul>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6" >
+                    <div class="card-body" style="max-height:180px;" >
+                        <h5 class="card-title">{{$company->name}}</h5>
+                        <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; width: 100%; overflow: hidden;">{{$company->description}}</p>
+                        <p class="card-text"><small class="text-muted">{{$company->location}}</small></p>
+                        <p class="card-text"><small class="text-muted">{{$company->linkedin}}</small></p>
+                    </div>
+                </div>
 
-                <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="p-2">
-                            <a href="{{ route('companies.edit', $company) }}"> <button class="btn btn-primary" type="submit"> <i class="material-icons">edit</i> </button> </a>
-                        </div>
-                        <div class="p-2">
-                            <form action="{{ route('companies.destroy', $company)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> <i class="material-icons">delete</i> </button>
-                            </form>
-                        </div>
-                        <div class="p-2">
-                            <a href="{{ route('companies.show', $company) }}"> <button class="btn btn-primary" type="submit"> <i class="material-icons">more</i> </button> </a>
-                        </div>
-                      </div>
+                <div class="col-2 col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end align-items-center mb-2" style="flex-direction:column;">
+
+
+
+                    <a href="{{ route('companies.show', $company) }}"> <button class="btn btn-primary" type="submit"> <i class="material-icons">more</i> </button> </a>
+
                 </div>
 
             </div>
         </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
+
 
 {{ $companies->links() }}
 

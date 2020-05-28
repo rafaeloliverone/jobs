@@ -88,8 +88,7 @@
             </div>
 
             <div class="links">
-                <a href="{{ route('jobs.index') }}">Find jobs</a>
-                <a href="{{ route('companies.index') }}">Find Companies</a>
+                <a href="{{ route('companies.index') }}">Find Jobs and Companies</a>
             </div>
         </div>
     </div>
